@@ -12,14 +12,16 @@
 #############################################################################
 
 import requests
-from os import path
+from zipfile import ZipFile
+from os import path, remove
 
 # If the CWS API ever changes, update this URL.
 # The rest of the script is probably gonna work fine.
 url = "https://clients2.google.com/service/update2/crx?response=redirect&os=linux&arch=x64&os_arch=x86_64&nacl_arch=x86-64&prod=chromium&prodchannel=unknown&prodversion=91.0.4442.4&lang=en-US&acceptformat=crx2,crx3&x=id%3D{0}%26installsource%3Dondemand%26uc"
 
 # Finds URI of user's desktop
-desktop_path = path.join(path.expanduser("~"), "Desktop")
+homedir = path.expanduser("~")
+desktop_path = path.join(homedir, "Desktop")
 
 
 ext_ids = []
@@ -40,8 +42,30 @@ while True:
 for ext_id in ext_ids:
 	# GET request the crx file
 	res = requests.get(url.format(ext_id))
-	print(url.format(ext_id))
+	relpath = path.join(desktop_path, ext_id)
 
 	# Save the file
-	with open(path.join(desktop_path, ext_id+".crx"), "wb") as f:
+	with open(relpath+".crx", "wb") as f:
 		f.write(res.content)
+
+		with ZipFile(relpath+".crx","r") as zip_ref:
+			fext_path = path.join(
+				path.expanduser("~"),
+				"Documents/Unpacked Extensions",
+				ext_id
+			)
+
+			zip_ref.extractall(fext_path)
+		
+	remove(relpath + ".crx")
+		
+
+
+print("Done! To finish installations, go to brave://extensions in the browser, and follow these steps:")
+print(" - Enable Developer Mode if it's not already enabled")
+print(" - Click \"Load Unpacked Extension\" and select the folder of the extension you want to install.")
+print(" - Repeat the last step for each extension you want to install.")
+print("\nThis app saves folders to a folder called \"Unpacked Extensions\" in your LOCAL Documents folder.")
+print("######################################################################################################")
+print("# IMPORTANT - IF YOU CAN'T FIND IT, YOU'RE PROBABLY LOOKING IN YOUR ONEDRIVE DOCUMENTS FOLDER!!!!!!! #")
+print("######################################################################################################\n\n\n")
