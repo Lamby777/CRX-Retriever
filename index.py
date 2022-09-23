@@ -1,9 +1,7 @@
 #############################################################################
 #																# - # = # X #
 #############################################################################
-#				Downloads stuff from CWS via Tor Browser					#
-#		Tor doesn't load? Make sure to enable bridges in your settings!		#
-#																			#
+#			  Downloads stuff from CWS via Google CWS Clients2				#
 #																			#
 # Made for Cyber laptops, because BitWarden doesn't deserve to be blocked	#
 #			- Dex															#
