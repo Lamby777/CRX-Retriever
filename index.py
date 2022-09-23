@@ -37,7 +37,7 @@ while True:
 	# Otherwise, add the input onto the list
 	ext_ids.append(id)
 
-
+print("Loading...")
 
 for ext_id in ext_ids:
 	# GET request the crx file
@@ -58,14 +58,18 @@ for ext_id in ext_ids:
 			zip_ref.extractall(fext_path)
 		
 	remove(relpath + ".crx")
+
+	print("Saved extension " + ext_id + "...")
 		
 
 
-print("Done! To finish installations, go to brave://extensions in the browser, and follow these steps:")
+print("\n\nDone! To finish installations, go to brave://extensions in the browser, and follow these steps:")
 print(" - Enable Developer Mode if it's not already enabled")
 print(" - Click \"Load Unpacked Extension\" and select the folder of the extension you want to install.")
 print(" - Repeat the last step for each extension you want to install.")
-print("\nThis app saves folders to a folder called \"Unpacked Extensions\" in your LOCAL Documents folder.")
-print("######################################################################################################")
-print("# IMPORTANT - IF YOU CAN'T FIND IT, YOU'RE PROBABLY LOOKING IN YOUR ONEDRIVE DOCUMENTS FOLDER!!!!!!! #")
-print("######################################################################################################\n\n\n")
+print("\nThis app saves folders to a folder called \"Unpacked Extensions\" in your LOCAL Documents folder.\n")
+print("##############################################################################################################")
+print("#                                                                                                            #")
+print("#     IMPORTANT - IF YOU CAN'T FIND IT, YOU'RE PROBABLY LOOKING IN YOUR ONEDRIVE DOCUMENTS FOLDER!!!!!!!     #")
+print("#                                                                                                            #")
+print("##############################################################################################################\n\n\n")
