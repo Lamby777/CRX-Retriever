@@ -73,3 +73,6 @@ print("#                                                                        
 print("#     IMPORTANT - IF YOU CAN'T FIND IT, YOU'RE PROBABLY LOOKING IN YOUR ONEDRIVE DOCUMENTS FOLDER!!!!!!!     #")
 print("#                                                                                                            #")
 print("##############################################################################################################\n\n\n")
+
+print("Press Enter to exit.\n")
+input()
