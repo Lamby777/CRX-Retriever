@@ -13,15 +13,13 @@
 #	I drank the Kool-Aid. Oh yeahhhhh!					#	OK	#	Cancel	#
 #############################################################################
 
-import os
+import requests
+from os import path
 
-print("Path to Tor Browser binary (leave blank for C:\\Tor Browser\\firefox.exe)")
-tor_path = input()
-
-if tor_path == "":
-	tor_path = "C:\\Tor Browser\\firefox.exe"
-
-cmd = "\"" + tor_path + "\" -new-tab \"{url}\""
+# If the CWS API ever changes, update this URL.
+# The rest of the script is probably gonna work fine.
+url = "https://clients2.google.com/service/update2/crx?response=redirect&os=linux&arch=x64&os_arch=x86_64&nacl_arch=x86-64&prod=chromium&prodchannel=unknown&prodversion=91.0.4442.4&lang=en-US&acceptformat=crx2,crx3&x=id%3D{0}%26installsource%3Dondemand%26uc"
+desktop_path = path.join(path.expanduser('~'), "Desktop")
 
 
 
@@ -39,9 +37,9 @@ while True:
 
 
 for ext_id in ext_ids:
-	url = "https://clients2.google.com/service/update2/crx?response=redirect&os=linux&arch=x64&os_arch=x86_64&nacl_arch=x86-64&prod=chromium&prodchannel=unknown&prodversion=91.0.4442.4&lang=en-US&acceptformat=crx2,crx3&x=id%3D"+ext_id+"%26installsource%3Dondemand%26uc"
-	fcmd = cmd.format(url=url)
+	# GET request the crx file, and save it
+	res = requests.get(url.format(ext_id))
+	print(url.format(ext_id))
 
-	print(fcmd)
-
-	os.system(fcmd)
+	with open(path.join(desktop_path, ext_id+".crx"), "wb") as f:
+		f.write(res.content)
