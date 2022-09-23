@@ -19,8 +19,9 @@ from os import path
 # If the CWS API ever changes, update this URL.
 # The rest of the script is probably gonna work fine.
 url = "https://clients2.google.com/service/update2/crx?response=redirect&os=linux&arch=x64&os_arch=x86_64&nacl_arch=x86-64&prod=chromium&prodchannel=unknown&prodversion=91.0.4442.4&lang=en-US&acceptformat=crx2,crx3&x=id%3D{0}%26installsource%3Dondemand%26uc"
-desktop_path = path.join(path.expanduser('~'), "Desktop")
 
+# Finds URI of user's desktop
+desktop_path = path.join(path.expanduser("~"), "Desktop")
 
 
 ext_ids = []
@@ -29,17 +30,20 @@ while True:
 	print("ID of Chrome Extension? (leave empty to download queue)")
 	id = input()
 
+	# If input empty, start downloading
 	if id == "":
 		break
 
+	# Otherwise, add the input onto the list
 	ext_ids.append(id)
 
 
 
 for ext_id in ext_ids:
-	# GET request the crx file, and save it
+	# GET request the crx file
 	res = requests.get(url.format(ext_id))
 	print(url.format(ext_id))
 
+	# Save the file
 	with open(path.join(desktop_path, ext_id+".crx"), "wb") as f:
 		f.write(res.content)
