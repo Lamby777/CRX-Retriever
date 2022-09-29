@@ -20,9 +20,7 @@ Copy this ID, and paste it into the app. If CTRL+V isn't working, try right clic
 
 ![Paste IDs into app](/readmeData/pasting.png)
 
-After you've queued all your needed extensions into the app, press enter on an empty line to submit. The app will download them onto your desktop one-by-one, unpack them into the folder
-`C:\Users\{you}\Documents\Unpacked Extensions`, and finally, it will
-delete the downloaded CRX from your desktop.
+After you've queued all your needed extensions into the app, press enter on an empty line to submit. The app will download them onto the output folder on the root of your `C:` drive one-by-one, unpack them, and finally, it will delete the CRX when finished.
 
 Follow the instructions it gives in the terminal, or if you want, keep reading this manual. They both contain the same instructions.
 

@@ -6,7 +6,7 @@
 # Made for Cyber laptops, because BitWarden doesn't deserve to be blocked	#
 #			- Dex															#
 #																			#
-#		https://github.com/Lamby777/ExtensionRipper							#
+#		https://github.com/Lamby777/CRX-Retriever							#
 #														#####################
 #	I drank the Kool-Aid. Oh yeahhhhh!					#	OK	#	Cancel	#
 #############################################################################
@@ -20,8 +20,7 @@ from os import path, remove
 url = "https://clients2.google.com/service/update2/crx?response=redirect&os=linux&arch=x64&os_arch=x86_64&nacl_arch=x86-64&prod=chromium&prodchannel=unknown&prodversion=91.0.4442.4&lang=en-US&acceptformat=crx2,crx3&x=id%3D{0}%26installsource%3Dondemand%26uc"
 
 # Finds URI of user's desktop
-homedir = path.expanduser("~")
-desktop_path = path.join(homedir, "Desktop")
+output_path = path.normpath("C:\\Unpacked Extensions")
 
 
 ext_ids = []
@@ -42,20 +41,14 @@ print("Loading...")
 for ext_id in ext_ids:
 	# GET request the crx file
 	res = requests.get(url.format(ext_id))
-	relpath = path.join(desktop_path, ext_id)
+	relpath = path.join(output_path, ext_id)
 
 	# Save the file
 	with open(relpath+".crx", "wb") as f:
 		f.write(res.content)
 
 		with ZipFile(relpath+".crx","r") as zip_ref:
-			fext_path = path.join(
-				path.expanduser("~"),
-				"Documents/Unpacked Extensions",
-				ext_id
-			)
-
-			zip_ref.extractall(fext_path)
+			zip_ref.extractall(relpath)
 		
 	remove(relpath + ".crx")
 
@@ -67,12 +60,7 @@ print("\n\nDone! To finish installations, go to brave://extensions in the browse
 print(" - Enable Developer Mode if it's not already enabled")
 print(" - Click \"Load Unpacked Extension\" and select the folder of the extension you want to install.")
 print(" - Repeat the last step for each extension you want to install.")
-print("\nThis app saves folders to a folder called \"Unpacked Extensions\" in your LOCAL Documents folder.\n")
-print("##############################################################################################################")
-print("#                                                                                                            #")
-print("#     IMPORTANT - IF YOU CAN'T FIND IT, YOU'RE PROBABLY LOOKING IN YOUR ONEDRIVE DOCUMENTS FOLDER!!!!!!!     #")
-print("#                                                                                                            #")
-print("##############################################################################################################\n\n\n")
+print("\nThis program saves folders to C:\\Unpacked Extensions.\n\n\n")
 
 print("Press Enter to exit.\n")
 input()
