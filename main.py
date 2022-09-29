@@ -20,9 +20,8 @@ from os import path, remove, mkdir
 url = "https://clients2.google.com/service/update2/crx?response=redirect&os=linux&arch=x64&os_arch=x86_64&nacl_arch=x86-64&prod=chromium&prodchannel=unknown&prodversion=91.0.4442.4&lang=en-US&acceptformat=crx2,crx3&x=id%3D{0}%26installsource%3Dondemand%26uc"
 
 # Finds URI of user's desktop
-mkdir(path.normpath("C:\\Unpacked Extensions"))
 output_path = path.normpath("C:\\Unpacked Extensions")
-
+mkdir(output_path)
 
 ext_ids = []
 
