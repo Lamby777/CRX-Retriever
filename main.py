@@ -21,7 +21,11 @@ url = "https://clients2.google.com/service/update2/crx?response=redirect&os=linu
 
 # Finds URI of user's desktop
 output_path = path.normpath("C:\\Unpacked Extensions")
-mkdir(output_path)
+
+try:
+	mkdir(output_path)
+except FileExistsError:
+    pass
 
 ext_ids = []
 
